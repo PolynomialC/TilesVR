@@ -78,14 +78,14 @@ $(document).ready(function(){
         //box[i].addEventListener('mouseleave', returnColor, false);
 
         if ( box[i].getAttribute('empty') === "true" ) {
-            box[i].setAttribute('color', 'white');
+            box[i].setAttribute('color', '#F1F7ED');
             highlightBlocks(box[i]);
         }
         else if ( box[i].getAttribute('active') === "true" ) {
-            box[i].setAttribute('color', '#00CC99');
+            box[i].setAttribute('color', '#C05746');
         }
         else {
-            box[i].setAttribute('color', '#b7b9bc');
+            box[i].setAttribute('color', '#747572');
         }
     }
 
