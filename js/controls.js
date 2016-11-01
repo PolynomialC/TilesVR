@@ -82,7 +82,7 @@ $(document).ready(function(){
             highlightBlocks(box[i]);
         }
         else if ( box[i].getAttribute('active') === "true" ) {
-            box[i].setAttribute('color', '#C05746');
+            box[i].setAttribute('color', '#1c1c1f');
         }
         else {
             box[i].setAttribute('color', '#747572');
