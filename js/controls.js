@@ -6,8 +6,23 @@ $(document).ready(function(){
     var min_x = '1';
     var min_y = '1';
     var aboveBox, belowBox, leftBox, rightBox;
+    var cursor = document.getElementById('cursor');
 
-    
+
+    var changeColour = function() {
+        //DEMO CODE REPLACE SOON
+        this.setAttribute('color', '#88898c');
+        var oldBox = document.querySelectorAll('[y="' + ( parseInt(y_cord)) + '"][x="' + x_cord + '"]');
+        oldBox[0].setAttribute('color', '#1c1c1f');
+        aboveBox[0].innerHTML = '';
+        aboveBox[0].setAttribute('scale', '1');
+        belowBox[0].innerHTML = '';
+        belowBox[0].setAttribute('scale', '1');
+        leftBox[0].innerHTML = '';
+        leftBox[0].setAttribute('scale', '1');
+        //highlightBlocks(this);
+    };
+
    /* var returnColor = function() {
         //this.setAttribute('color', '#4CC3D9');  
 
@@ -50,8 +65,7 @@ $(document).ready(function(){
     //SET BLOCK STATES
     for (var i = 0; i < box.length; i++) {
         //Add mouse listeners
-        //box[i].addEventListener('mouseenter', changeColor, false);
-        //box[i].addEventListener('mouseleave', returnColor, false);
+        box[i].addEventListener('click', changeColour, false);        
 
         if ( box[i].getAttribute('empty') === "true" ) {
             box[i].setAttribute('color', '#88898c');
@@ -64,5 +78,7 @@ $(document).ready(function(){
             box[i].setAttribute('color', '#dfe0e6');
         }
     }
+
+    cursor.setAttribute('raycaster', 'objects: .clickable');
 
 });
