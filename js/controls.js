@@ -7,36 +7,8 @@ $(document).ready(function(){
     var min_y = '1';
     var aboveBox, belowBox, leftBox, rightBox;
 
-    /*Auto execute function to set intial cube colours
-    (function() {
-        
-    }) ();*/
-
-    var changeColor = function() {
-        //this.setAttribute('color', 'green');
-        y_cord = this.getAttribute('y');
-        x_cord = this.getAttribute('x');    
-
-        //Determine if there is a box alongside current box, if so change its colour
-        if (y_cord !== max_y) {
-            aboveBox = document.querySelectorAll('[y="' + ( parseInt(y_cord)+1 ) + '"][x="' + x_cord + '"]');
-            aboveBox[0].setAttribute('depth', '0.20');
-        }
-        if (y_cord !== min_y) {
-            belowBox = document.querySelectorAll('[y="' + ( parseInt(y_cord) - 1 ) + '"][x="' + x_cord + '"]');
-            belowBox[0].setAttribute('depth', '0.20');
-        }
-        if (x_cord !== min_x) {
-            leftBox = document.querySelectorAll('[y="' + y_cord + '"][x="' + ( parseInt(x_cord) - 1 ) + '"]');
-            leftBox[0].setAttribute('depth', '0.20');
-        }
-        if (x_cord !== max_x) {
-            rightBox = document.querySelectorAll('[y="' + y_cord + '"][x="' + ( parseInt(x_cord) + 1 ) + '"]');
-            rightBox[0].setAttribute('depth', '0.20');   
-        }
-    };
-
-    var returnColor = function() {
+    
+   /* var returnColor = function() {
         //this.setAttribute('color', '#4CC3D9');  
 
         //RESET SURROUNDING BOX VALUES
@@ -46,7 +18,7 @@ $(document).ready(function(){
         rightBox[0].setAttribute('depth', '0.05');
 
         aboveBox, belowBox, leftBox, rightBox = null;
-    };
+    };*/
 
     var highlightBlocks =  function(emptyBox) {
         y_cord = emptyBox.getAttribute('y');
@@ -55,18 +27,22 @@ $(document).ready(function(){
         //Determine if there is a box alongside current box, if so change its colour
         if (y_cord !== max_y) {
             aboveBox = document.querySelectorAll('[y="' + ( parseInt(y_cord)+1 ) + '"][x="' + x_cord + '"]');
+            aboveBox[0].classList.add('clickable');
             aboveBox[0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
         }
         if (y_cord !== min_y) {
             belowBox = document.querySelectorAll('[y="' + ( parseInt(y_cord) - 1 ) + '"][x="' + x_cord + '"]');
+            belowBox[0].classList.add('clickable');
             belowBox[0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
         }
         if (x_cord !== min_x) {
             leftBox = document.querySelectorAll('[y="' + y_cord + '"][x="' + ( parseInt(x_cord) - 1 ) + '"]');
+            leftBox[0].classList.add('clickable');
             leftBox[0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
         }
         if (x_cord !== max_x) {
             rightBox = document.querySelectorAll('[y="' + y_cord + '"][x="' + ( parseInt(x_cord) + 1 ) + '"]');
+            rightBox[0].classList.add('clickable');
             rightBox[0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
         }
     };
