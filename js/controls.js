@@ -86,6 +86,7 @@ $(document).ready(function(){
         }
     }
 
+
     cursor.setAttribute('raycaster', 'objects: .clickable');
 
 });
