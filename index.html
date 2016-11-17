@@ -30,32 +30,52 @@
                         </button>                        
                     </div>
 
-                    <form id="mainMenu-loginMenu" style="display: none">
+                    <div id="mainMenu-loginMenu" style="display: none">
                         <div class="form-group row mainMenu-input">
                             <input type="email" class="form-control" placeholder="Enter email"> 
                         </div>    
                         <div class="form-group row mainMenu-input">
                             <input type="password" class="form-control" placeholder="Enter password">  
+                        </div>
+
+                        <div id="mainMenu-navButtons">
+                            <button id="mainMenu-loginBtn" type="submit" onclick="loginUser()" class="menuBtn btn btn-primary btn-lg btn-block">
+                                Submit
+                            </button>                               
+                            <button id="mainMenu-backBtn" type="button" onclick="navigateMenu()" class="menuBtn btn btn-default btn-lg btn-block">
+                                Back
+                            </button>                               
                         </div>                       
-                    </form>
+                    </div>
 
-                    <form id="mainMenu-registerMenu" style="display: none">
+                    <div id="mainMenu-registerMenu" style="display: none">
                         <div class="form-group row mainMenu-input">
                             <input type="email" class="form-control" placeholder="Enter email"> 
                         </div>    
                         <div class="form-group row mainMenu-input">
                             <input type="password" class="form-control" placeholder="Enter password">  
-                        </div>                        
-                    </form>  
+                        </div>
 
-                    <div id="mainMenu-navButtons" style="display: none">
-                        <button id="mainMenu-loginBtn" type="submit" class="menuBtn btn btn-primary btn-lg btn-block">
-                            Submit
-                        </button>                               
-                        <button id="mainMenu-backBtn" type="button" onclick="navigateMenu()" class="menuBtn btn btn-default btn-lg btn-block">
-                            Back
-                        </button>                               
-                    </div> 
+                        <div id="mainMenu-navButtons">
+                            <button id="mainMenu-loginBtn" onsubmit="registerUser()" type="submit" class="menuBtn btn btn-primary btn-lg btn-block">
+                                Register
+                            </button>                               
+                            <button id="mainMenu-backBtn" type="button" onclick="navigateMenu()" class="menuBtn btn btn-default btn-lg btn-block">
+                                Back
+                            </button>                               
+                        </div>                        
+                    </div>  
+                    
+                    <div id="controls" style="display: none" action="VRgame.html">
+                        <form action="VRgame.html">
+                            <button id="controls-VR" type="submit" class="menuBtn btn btn-primary btn-lg btn-block">
+                                VR
+                            </button>                            
+                        </form>
+                        <button id="controls-2D" type="submit" class="menuBtn btn btn-default btn-lg btn-block">
+                            2D
+                        </button>                                              
+                    </div>
 
                 </div>               
             </div>

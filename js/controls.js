@@ -5,9 +5,22 @@ $(document).ready(function(){
     var min_x = '1', min_y = '1';
     var aboveBox, belowBox, leftBox, rightBox;
     var cursor = document.getElementById('cursor');
+    var nearbyBlocks = {};
 
     var moveBlock = function(currentBlock) {
+        //Get current block color
+        /*var currentBlockColor = this.getAttribute("color");
+        //Work out where the empty block is
+        for (var block in nearbyBlocks){
+            if ( block[0].hasAttribute("empty") ) {
+                block[0].setAttribute('color', currentBlockColor);
+                block[0].removeAttribute("empty");
+            }
+        }*/
+
         this.setAttribute('color', '#88898c');
+        highlightBlocks(nearbyBlocks, false);
+        calculateNearbyBlocks(this);
        /* var oldBox = document.querySelectorAll('[y="' + ( parseInt(y_cord)) + '"][x="' + x_cord + '"]');
 
         //DEMO CODE REPLACE SOON
@@ -25,10 +38,10 @@ $(document).ready(function(){
         leftBox[0].innerHTML = '';
         leftBox[0].setAttribute('scale', '1');
         //highlightBlocks(this);*/
+
     };
 
     var calculateNearbyBlocks = function(currentBlock) {
-        var nearbyBlocks = {};
         y_cord = currentBlock.getAttribute('y');
         x_cord = currentBlock.getAttribute('x');  
 
@@ -45,14 +58,23 @@ $(document).ready(function(){
             nearbyBlocks.rightBox = document.querySelectorAll('[y="' + y_cord + '"][x="' + ( parseInt(x_cord) + 1 ) + '"]');
         }
 
-        highlightBlocks(nearbyBlocks);                   
+        highlightBlocks(nearbyBlocks, true);                   
      };
 
-    var highlightBlocks =  function(nearbyBlocks) {   
+    var highlightBlocks =  function(nearbyBlocks, status) {
+        //If status == true highlight blocks, if false unhighlight blocks   
         for (var block in nearbyBlocks){
-            nearbyBlocks[block][0].classList.add('clickable');
-            nearbyBlocks[block][0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
-        }  
+            if (status === true) {
+                nearbyBlocks[block][0].classList.add('clickable');
+                nearbyBlocks[block][0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
+            }
+            else {
+                nearbyBlocks[block][0].classList.remove('clickable');
+                nearbyBlocks[block][0].innerHTML = '';               
+            }
+        }
+            cursor.setAttribute('raycaster', 'objects: .clickable');
+  
     };
 
     //SET BLOCK STATES
