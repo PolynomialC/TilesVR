@@ -6,45 +6,37 @@ $(document).ready(function(){
     var aboveBox, belowBox, leftBox, rightBox;
     var cursor = document.getElementById('cursor');
     var nearbyBlocks = {};
+    var currentBlockColor;
+
+
+    var reCursor = function() {
+        //Hacky fix for A-Frames cursor problem
+        //Recreates the cursor to update click handlers
+        cursor.removeAttribute('raycaster');
+        cursor.setAttribute('raycaster', 'objects: .clickable');
+    };
 
     var moveBlock = function(currentBlock) {
-        //Get current block color
-        /*var currentBlockColor = this.getAttribute("color");
-        //Work out where the empty block is
-        for (var block in nearbyBlocks){
-            if ( block[0].hasAttribute("empty") ) {
-                block[0].setAttribute('color', currentBlockColor);
-                block[0].removeAttribute("empty");
-            }
-        }*/
+        //Get current block color used later to change the empty block color
+        currentBlockColor = this.getAttribute("color");
 
+        //Set the selected block to empty
         this.setAttribute('color', '#88898c');
+
         highlightBlocks(nearbyBlocks, false);
         calculateNearbyBlocks(this);
-       /* var oldBox = document.querySelectorAll('[y="' + ( parseInt(y_cord)) + '"][x="' + x_cord + '"]');
 
-        //DEMO CODE REPLACE SOON
-        if (this.getAttribute('active') === "true") {
-            oldBox[0].setAttribute('color', '#1c1c1f');
-        }
-        else {
-            oldBox[0].setAttribute('color', '#dfe0e6');
-        }
-        //DEMO CODE REPLACE SOON
-        aboveBox[0].innerHTML = '';
-        aboveBox[0].setAttribute('scale', '1');
-        belowBox[0].innerHTML = '';
-        belowBox[0].setAttribute('scale', '1');
-        leftBox[0].innerHTML = '';
-        leftBox[0].setAttribute('scale', '1');
-        //highlightBlocks(this);*/
-
+        /*Set the selected block 'empty' to true,
+        keep this below calculateNearbyBlocks as the empty attribute
+        is used to locate the empty block*/
+        this.setAttribute('empty', 'true');
     };
 
     var calculateNearbyBlocks = function(currentBlock) {
         y_cord = currentBlock.getAttribute('y');
         x_cord = currentBlock.getAttribute('x');  
 
+        //Calculate the nearby blocks based on HTML coordinates
         if (y_cord !== max_y) {
             nearbyBlocks.aboveBox = document.querySelectorAll('[y="' + ( parseInt(y_cord)+1 ) + '"][x="' + x_cord + '"]');
         }
@@ -66,15 +58,21 @@ $(document).ready(function(){
         for (var block in nearbyBlocks){
             if (status === true) {
                 nearbyBlocks[block][0].classList.add('clickable');
-                nearbyBlocks[block][0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate-reverse" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
+                nearbyBlocks[block][0].innerHTML = '<a-animation dur="500" attribute="scale" direction="alternate" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>';
             }
             else {
                 nearbyBlocks[block][0].classList.remove('clickable');
-                nearbyBlocks[block][0].innerHTML = '';               
+                //Slow animation smoothly
+                nearbyBlocks[block][0].innerHTML = '<a-animation dur="50" attribute="scale" direction="normal" repeat="0" to="1 1 1"></a-animation>';               
             }
-        }
-            cursor.setAttribute('raycaster', 'objects: .clickable');
-  
+
+            //Change the colour of the empty block to the colour of the moved block
+            if ( nearbyBlocks[block][0].hasAttribute("empty") ) {
+                nearbyBlocks[block][0].setAttribute('color', currentBlockColor);
+                nearbyBlocks[block][0].removeAttribute("empty");
+            }
+        }  
+        reCursor();
     };
 
     //SET BLOCK STATES
@@ -93,6 +91,6 @@ $(document).ready(function(){
             box[i].setAttribute('color', '#dfe0e6');
         }
     }
-
-    cursor.setAttribute('raycaster', 'objects: .clickable');
 });
+
+
